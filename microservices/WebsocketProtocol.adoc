@@ -108,7 +108,7 @@ player,<playerId>,{
 }
 ----
 
-Note: Some attributes, like "exits", "commands", and "roomInventory" can also be sent with other room events.
+Note: Some attributes, like "exits", "commands", and "roomInventory" can also be sent with other room events as a pseudo push notification
 
 
 #### Room -> Mediator -> Client, chat messages
