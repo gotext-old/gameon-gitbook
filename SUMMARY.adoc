@@ -2,5 +2,5 @@
 
 . link:README.adoc[Introduction]
 . link:game_play.adoc[Game play]
-. link:architecture.adoc[Application architecture]
+. link:microservices/README.adoc[Application architecture]
 . link:chronicles/README.adoc[Appendix: The Chronicles]

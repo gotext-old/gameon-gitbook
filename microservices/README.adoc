@@ -1,0 +1,13 @@
+= Application architecture
+:icons: font
+:toc: preamble
+:toc-title: 
+:toclevels: 2
+:imagesdir: /images
+
+Game On! is an application composed of several microservices. 
+
+
+
+Note that the set of core services has changed over time. The best practice with microservice architectures is still to start with a monolith, or at worst, with very large chunks. We started with two large blobs, and refined the granularity of services as the application evolved. link:chronicles/README.md[The Chronicles] describe this evolution, if you're curious.
+
