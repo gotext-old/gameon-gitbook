@@ -33,7 +33,7 @@ Some commands will always be available. Those that are implemented by link:micro
 
 == First Room
 
-First Room is a special room: it is located (and fixed with a permanent sticking charm) at the origin of the map. It is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`).
+First Room is a special room: it is located (and fixed with a https://en.wikibooks.org/wiki/Muggles%27_Guide_to_Harry_Potter/Magic/Permanent_Sticking_Charm[permanent sticking charm]) at the origin of the map. It is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`).
 
 First room also provides some useful custom commands for room developers.
 
