@@ -5,13 +5,11 @@
 :toclevels: 2
 :imagesdir: /images
 
-Games are meant to be played! The only objective for a game player is to be entertained.
-
-There may be puzzles to solve, riddles to answer, cryptic speech to decipher, whatever! It completely depends on what the developers of any given room have decided to build. 
+Games are meant to be played! The only objective for a game player is to be entertained. There may be puzzles to solve, riddles to answer, cryptic speech to decipher, whatever! It completely depends on what the developers of any given room have decided to build. 
 
 == Navigation and common commands
 
-Some commands will always be available. Those that are implemented by core game services (namely the Mediator) will also always behave the same.
+Some commands will always be available. Those that are implemented by link:microservices/README.adoc[core game services] (namely the Mediator) will also always behave the same.
 
 .Common commands provided by the game
 [cols=".<m,.<2",options="header,footer"]
