@@ -41,7 +41,7 @@ Empty rooms act as placeholders: they do nothing interesting, but are navigable 
 
 ==== Sick Room
 
-Sick rooms are also placeholders, but they specifically stand in for rooms that exist, but are not responsive. They are a game-appropriate implementation of the circuit breaker pattern: detecting failures and unresponsive rooms, and preventing repeated access to those rooms until the room has been restored.
+Sick rooms are also placeholders, but they specifically stand in for rooms that exist, but are not responsive. They are a game-appropriate implementation of the circuit breaker pattern: detecting failures and unresponsive rooms, and preventing repeated access to those rooms until they have been restored.
 
 === Map
 
