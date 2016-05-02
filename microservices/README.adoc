@@ -17,7 +17,7 @@ The webapp service is a simple nginx process that serves the static files that c
 
 Having this as a separate entity allows our front-end to be changed and updated independently from other services. Some suggest that UI components should be provided by each backend service, which can be true with a UI built from distinct sections. The game, however, uses a more integrated UI: the application running in the client device is invoking public APIs directly, to render the responses appropriately. 
 
-This service has fairly simple scaling requirements, as it serving only cachable static files.
+The webapp process has fairly simple scaling requirements, as it serving only cachable static files.
 
 === Player
 
