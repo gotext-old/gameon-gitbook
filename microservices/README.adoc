@@ -37,10 +37,11 @@ First Room is the starting place for every player joining the game, and is also 
 
 ==== Empty Room
 
-Empty rooms act as placeholders or glue. They do nothing interesting, but are navigable to allow players to navigate the map even when there are holes in it.
+Empty rooms act as placeholders: they do nothing interesting, but are navigable to allow players to navigate the map even when there are holes in it.
 
 ==== Sick Room
 
+Sick rooms are also placeholders, but they specifically stand in for rooms that exist, but are not responsive. They are a game-appropriate implementation of the circuit breaker pattern.
 
 === Map
 
