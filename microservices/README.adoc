@@ -27,6 +27,7 @@ The Player service
 
 The Mediator, once upon a time, was part of the player service. It was split into its own microservice for two reasons: a) the function it performs is not strictly related to the notion of a "player", and b) it has drastically different scaling requirements because of what it does.
 
+After a user has logged in
 
 
 === Map
