@@ -25,9 +25,17 @@ The Player service
 
 === Mediator
 
-The Mediator, once upon a time, was part of the player service. It was split into its own microservice for two reasons: a) the function it performs is not strictly related to the notion of a "player", and b) it has drastically different scaling requirements because of what it does.
+Once upon a time, the mediator was part of the player service. It was split into its own microservice for two reasons: a) the function it performs is not strictly related to the notion of a "player", and b) it has drastically different scaling requirements because of what it does.
 
-After a user has logged in
+After a user has logged in, a websocket is established between the user's device and the mediator. The mediator then maintains a second websocket connection to whatever room the player is in. 
+
+To provide the best user experience it can, the mediator retains cached information about rooms it has visited, to ensure that players can move between rooms if the map service can't be reached. It also provides a few special rooms itself: First Room, Empty Room, and Sick Room.
+
+==== First Room
+
+==== Empty Room
+
+==== Sick Room
 
 
 === Map
