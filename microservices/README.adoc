@@ -61,6 +61,8 @@ The configuration attributes stored in etcd are environment-specific: different 
 
 === Swagger
 
+
+
 === Room implementations
 
 We have a few room implementations defined within our repositories.
