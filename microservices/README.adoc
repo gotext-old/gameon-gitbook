@@ -28,6 +28,8 @@ image:CoreServices.png["Core services",align="center"]
 
 image:SecondaryServices.png["Secondary services",align="center"]
 
+=== etcd
+
 === Swagger
 
 === RecRoom / Basement
