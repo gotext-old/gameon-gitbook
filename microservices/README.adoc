@@ -55,7 +55,9 @@ image:SecondaryServices.png["Secondary services",align="center"]
 
 === etcd
 
-Etcd was added to simplify configuration management. There are many ways to 
+Etcd was added to simplify configuration management. There are many ways to slice this particular onion, but the important for us was being able to see the configuration attributes used, and in some cases shared, by our core services in a central place. 
+
+The configuration attributes stored in etcd are environment-specific: different values are provided for different deployment stages. In our configuration, etcd is not used for local development.
 
 === Swagger
 
