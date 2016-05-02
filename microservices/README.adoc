@@ -37,6 +37,8 @@ First Room is the starting place for every player joining the game, and is also 
 
 ==== Empty Room
 
+Empty rooms act as placeholders or glue. They do nothing interesting, but are navigable to allow players to navigate the map even when there are holes in it.
+
 ==== Sick Room
 
 
