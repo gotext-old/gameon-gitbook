@@ -21,9 +21,13 @@ The webapp process has fairly simple scaling requirements, as it serving only ca
 
 === Player
 
-
+The Player service 
 
 === Mediator
+
+The Mediator, once upon a time, was part of the player service. It was split into its own microservice for two reasons: a) the function it performs is not strictly related to the notion of a "player", and b) it has drastically different scaling requirements because of what it does.
+
+
 
 === Map
 
