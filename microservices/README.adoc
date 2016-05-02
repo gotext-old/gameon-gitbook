@@ -33,6 +33,8 @@ To provide the best user experience it can, the mediator retains cached informat
 
 ==== First Room
 
+First Room is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`). It also provides a few special commands that room implementors can use to teleport to rooms that they own.
+
 ==== Empty Room
 
 ==== Sick Room
