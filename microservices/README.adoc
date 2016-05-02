@@ -29,11 +29,11 @@ Once upon a time, the mediator was part of the player service. It was split into
 
 After a user has logged in, a websocket is established between the user's device and the mediator. The mediator then maintains a second websocket connection to whatever room the player is in. 
 
-To provide the best user experience it can, the mediator retains cached information about rooms it has visited, to ensure that players can move between rooms if the map service can't be reached. It also provides a few special rooms itself: First Room, Empty Room, and Sick Room.
+To provide the best user experience it can, the mediator retains cached information about rooms it has visited, to ensure that players can move between rooms if the map service can't be reached. It also provides a few special rooms itself (First Room, Empty Room, and Sick Room) to ensure that a user is not ever presented with an empty screen. As long as instances of the mediator are healthy, rooms will be available to navigate between.
 
 ==== First Room
 
-First Room is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`). It also provides a few special commands that room implementors can use to teleport to rooms that they own.
+First Room is the starting place for every player joining the game, and is also where players return when things go terribly wrong, or when they call for a rescue (`/sos`). It also provides a few special commands that room implementors can use to teleport to rooms that they own. 
 
 ==== Empty Room
 
