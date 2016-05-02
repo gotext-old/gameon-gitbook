@@ -5,13 +5,12 @@
 :toclevels: 2
 :imagesdir: /images
 
-Game On! is an application composed of several microservices. 
+Game On! is an application composed of several microservices. The set services has changed over time: the best practice with microservice architectures is still to start with a monolith or (at least) very large chunks. We started with two large blobs, and refined the granularity of services as the application evolved. link:chronicles/README.md[The Chronicles] describe this evolution, if you're curious.
+
+== Core Services
 
 image:CoreServices.png["Core services",align="center"]
 
-The set of core services has changed over time: the best practice with microservice architectures is still to start with a monolith or (at least) very large chunks. We started with two large blobs, and refined the granularity of services as the application evolved. link:chronicles/README.md[The Chronicles] describe this evolution, if you're curious.
-
-== Core Services
 
 === Map
 
@@ -23,5 +22,13 @@ The set of core services has changed over time: the best practice with microserv
 
 === webapp
 
-=== Proxy/Gateway and swagger (not shown)
+=== Proxy/Gateway
+
+== Other Services
+
+=== Swagger
+
+=== RecRoom / Basement
+
+=== Node.js Room
 
