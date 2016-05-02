@@ -4,7 +4,6 @@
 :toc-title: 
 :toclevels: 2
 :imagesdir: /images
-
 Rooms are registered as entities with the Map, and are where the good stuff is. The silly, the crazy, the odd, the boring: this is where you can let your creativity loose. But, what do rooms have to do with microservices? 
 
 Let's say you want to make the most popular room ever (an admirable goal), which means your room will need to scale to more than one instance. How do you want that to appear to your players? You have choices. You could treat it as old-school game sharding, where players can only see or talk to or interact with people in the same shard they are in. You could also look at using a message queue, a shared cache, or something like the pubsub function in redis to allow all of the rooms to act like one big room. How does it work? What does it do to your code?
