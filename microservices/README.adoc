@@ -55,6 +55,8 @@ image:SecondaryServices.png["Secondary services",align="center"]
 
 === etcd
 
+Etcd was added to simplify configuration management. There are many ways to 
+
 === Swagger
 
 === Room implementations
@@ -69,7 +71,7 @@ We have a few room implementations defined within our repositories.
 
 For most of them, a single service is providing a single room. The notable exception is the RecRoom and Basement, where a single service is providing two related rooms. 
 
-Each service is responsible for managing its own data (if any), and satisfying the published APIs for a room to the satisfaction of the Sweep. Each will make it's own determination of how to share information across active instances of the service
+Each service is responsible for managing its own data (if any), and satisfying the published APIs for a room to the satisfaction of the Sweep. 
 
 
 
