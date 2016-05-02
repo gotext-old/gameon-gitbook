@@ -3,6 +3,6 @@
 . link:README.adoc[Introduction]
 . link:game_play.adoc[Game play]
 . link:microservices/README.adoc[Application architecture]
-.. Creating Rooms
+. Creating Rooms
 . link:chronicles/README.adoc[Appendix: The Chronicles]
 
