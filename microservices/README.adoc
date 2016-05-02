@@ -13,7 +13,7 @@ image:CoreServices.png["Core services",align="center"]
 
 === webapp
 
-The webapp service is trivial: it is a simple nginx process that serves the static files that comprise the front-end of the UI. The front-end uses standard/published APIs to interact with backend microservices. Having this as a separate service allows our front-end to be changed and updated independently of the other services.
+The webapp service is trivial: it is a simple nginx process that serves the static files that comprise the front-end of the UI. The front-end uses standard/published APIs to interact with backend microservices. Having this as a separate service allows our front-end to be changed and updated independently of the other services. This service has fairly simple scaling requirements, as it serving only cachable static files.
 
 === Player
 
