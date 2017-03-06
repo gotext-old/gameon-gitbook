@@ -9,7 +9,7 @@
 image:../images/Progression.017.jpeg[Progression, width=95%]
 
 {game-on}[Game On!] is desgined as a fun way to explore microservices, right?  So our rooms
-are the microservice and we can write some puzzels, etc for them.  But shouldn't
+are the microservice and we can write some puzzles, etc for them.  But shouldn't
 room vistors be able to interact with other microservices?  Maybe outside of
 {game-on}[Game On!]?
 
@@ -19,8 +19,8 @@ scared to start programming again.  Where to start?  Well how about at the
 beginning with the {java-sample}[Java sample room]?
 
 While that was a good way to become familiar with the build process, docker,
-bluemix and other technologies - I wanted to create a room to interact with
-something.  So as stared blankly at my office wall I asked myself:
+bluemix and other technologies, I wanted to create a room to interact with
+something.  As stared blankly at my office wall I asked myself:
 
  "What's the weather like?"
 
