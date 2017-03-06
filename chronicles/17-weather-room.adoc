@@ -20,7 +20,7 @@ beginning with the {java-sample}[Java sample room]?
 
 While that was a good way to become familiar with the build process, docker,
 bluemix and other technologies, I wanted to create a room to interact with
-something.  As stared blankly at my office wall I asked myself:
+something.  As I stared blankly at my office wall I asked myself:
 
  "What's the weather like?"
 
