@@ -11,7 +11,7 @@
 :nodejsroom: https://github.com/gameontext/sample-room-nodejs
 :recroom: https://github.com/gameontext/gameon-room
 :security: link:ApplicationSecurty.adoc
-:simpleroom: https://github.com/gameontext/sample-java-room
+:simpleroom: https://github.com/gameontext/sample-room-java
 :swagger: https://gameontext.org/swagger/
 :WebSocket: link:WebSocketProtocol.adoc
 :walkthroughs: link:../walkthroughs/README.adoc
