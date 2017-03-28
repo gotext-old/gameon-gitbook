@@ -1,0 +1,20 @@
+= Foibles while making a Watson Alchemy Data News Room
+:icons: font
+:signedHeaders: link:../microservices/ApplicationSecurity.adoc
+:WebSocketProtocol: link:../microservices/WebSocketProtocol.adoc
+:game-on: https://game-on.org/
+:amalgam8: http://amalgam8.io
+
+This entry in the Chronicles will seem more like deleted scenes from a movie, compared to what has been chronicled so far. 
+
+The room I wanted to create was a Watson Alchemy Data API News Room. The details about that, and the code can be found here:
+	http://github.com/bradleyap/Watson-news-sample-room-java
+
+Among other things, what slowed me down a tad bit was trying to look at why a simple string edit to initial values of the room description would cause the tests to fail. Tests are sometimes written in a preliminary fashion, and perhaps in projects like GameOn! oriented toward learning; perhaps they are written just to demo having them, not so much demoing how to write them? Here was my quick fix: `mvn install -DskipTests` Yep, I took the path of least resistance.
+
+I learned that an API like Watson Alchemy Data is very complex. Many of my coding errors related to an inadequate grasp of the queries that are accepted by this API, even though, yes, I had this tool to help me out: http://querybuilder.alchemyapi.com/builder When you go to this site, it allows you to check boxes for what type of query you want, and displays the query that is built. Then it also shows the JSON data you have retrieved. Quite nice! The JSON you get back is straight-forward, but it's very easy to make mistakes when you transcribe and/or embed the pattern into code that accesses it.
+
+One other observation, I was given a certain number of "transactions" with my free Watson Alchemy API service account, (I was allowed a maximum of zero transactions). So as soon as I caused my first a transaction, the service would no longer work for me. I did not know and still do not know what triggers a transaction, or what kind of transaction this refers to. Someone on the Bluemix team increased my allottment and that took care of the issue. He said there was not a 1-to-1 correspondence between API calls and transactions. At some point I'll need to find out more about this.
+
+
+
