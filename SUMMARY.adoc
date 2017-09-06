@@ -1,41 +1,56 @@
 = Summary
 . link:README.adoc[Introduction]
 . link:game_play.adoc[Game Play]
+// -- WALKTHROUGHS -- 
 . link:walkthroughs/README.adoc[Extending the Game]
 .. link:walkthroughs/createRoom.adoc[Create a Room]
+// -- WALKTHROUGHS: DEPLOYMENT -- 
 .. link:walkthroughs/deployRoom.adoc[Deploy a Room]
 ... link:walkthroughs/deployRoom.adoc#_ibm_bluemix[IBM Bluemix]
 .... link:walkthroughs/bluemix-cf.adoc[Cloud Foundry]
 .... link:walkthroughs/bluemix-ics.adoc[Containers]
 ... link:walkthroughs/heroku.adoc[Heroku]
+// -- WALKTHROUGHS: REGISTRATION -- 
 .. link:walkthroughs/registerRoom.adoc[Register a Room]
 //.. link:walkthroughs/createNPC.adoc[Creating Non-Player Characters]
+// -- WALKTHROUGHS: ADVANCED ADVENTURES -- 
 .. link:walkthroughs/createMore.adoc[Advanced Adventures]
+// -- WALKTHROUGHS: CACHING -- 
 ... link:walkthroughs/createMore.adoc#_caching[Caching]
 .... link:walkthroughs/jsr107caching.adoc[JSR-107 part 1]
 .... link:walkthroughs/jsr107caching2.adoc[JSR-107 part 2]
+// -- WALKTHROUGHS: REST -- 
 ... link:walkthroughs/createMore.adoc#_rest[REST]
 .... link:walkthroughs/mapviarest.adoc[JAX RS]
+// -- WALKTHROUGHS: PERSISTENCE -- 
 ... link:walkthroughs/createMore.adoc#_persistence[Persistence]
 .... link:walkthroughs/cloudant.adoc[Cloudant]
+// -- WALKTHROUGHS: GENERAL ROOM IMPROVEMENTS -- 
 ... link:walkthroughs/createMore.adoc#_room_improvements[Better Rooms]
 .... link:walkthroughs/addItemsToYourRoom.adoc[Adding items]
 .... link:walkthroughs/creatingYourOwnRoom.adoc[Room Protocol]
+// -- WALKTHROUGHS: GENERAL DEVELOPMENT -- 
 ... link:walkthroughs/createMore.adoc#_game_on_developments[Game On Dev]
 .... link:walkthroughs/elkStack.adoc[ELK Logging]
 .... link:walkthroughs/local-docker.adoc[Local Build]
 ..... link:walkthroughs/git.adoc[Git]
 ..... link:walkthroughs/adding_your_own_sso_apps_for_local_testing.adoc[Social Login]
+// -- WALKTHROUGHS: SCALE-- 
 ... link:walkthroughs/createMore.adoc#_scale[Scale]
+// -- WALKTHROUGHS: FAULT TOLERANCE -- 
 ... link:walkthroughs/createMore.adoc#_fault_tolerance[Fault Tolerance]
+// -- WALKTHROUGHS: WATSON -- 
 ... link:walkthroughs/createMore.adoc#_watson[Watson]
 .... link:walkthroughs/addWatsonConversation.adoc[Add Conversation Service]
+// -- APP ARCHITECTURE -- 
 . link:microservices/README.adoc[Application Architecture]
 .. link:microservices/WebSocketProtocol.adoc[WebSocket Protocol]
 .. link:microservices/ApplicationSecurity.adoc[Application Security]
 .. link:microservices/Map.adoc[Map service details]
+// -- MICROSERVICES -- 
 . link:about/README.adoc[Microservices: The Backstory]
 .. link:about/twelve-factors.adoc[The Twelve Factors]
+// -- CHRONICLES -- 
 . link:chronicles/README.adoc[Appendix: The Chronicles]
 .. link:chronicles/1-first-pass.adoc[The First Pass]
 .. link:chronicles/2-cloud-automation.adoc[Automation! Clouds!]
