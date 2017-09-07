@@ -1,0 +1,28 @@
+= Running with Kubernetes
+:icons: font
+:toc:
+:toc-title:
+:toc-placement: manual
+:toclevels: 2
+:sociallogin: link:adding_your_own_sso_apps_for_local_testing.adoc
+:wdt-eclipse: link:eclipse_and_wdt.adoc
+:12-factor: link:../about/twelve-factors.adoc
+:docker: https://docs.docker.com/engine/installation/
+:git: link:git.adoc
+:vagrant: https://www.vagrantup.com/downloads.html
+:root: https://github.com/gameontext/gameon
+:adventures: link:createMore.adoc
+:contribute: https://github.com/gameontext/gameon/blob/master/CONTRIBUTING.md
+:releases: https://github.com/docker/compose/releases
+
+_TBD (I know.. such a tease!)_
+
+== Requirements
+
+[[running]]
+== Starting game services locally 
+
+== Files supporting Kubernetes
+
+[[rebuild]]
+== Rebuilding Core Game services with Kubernetes

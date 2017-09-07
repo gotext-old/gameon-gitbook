@@ -6,7 +6,7 @@
 :toclevels: 2
 :creatingYourOwnRoom: link:creatingYourOwnRoom.adoc
 :elkStack: link:elkStack.adoc
-:local-docker: link:local-docker.adoc
+:local-build: link:local-build.adoc
 :jsr107a: link:jsr107caching.adoc
 :jsr107b: link:jsr107caching2.adoc
 :jaxrs: link:mapviarest.adoc
@@ -67,7 +67,7 @@ for more information on how to develop your room. Here are a few guides to help
 you on your way.
 
 * [languagename]#GENERIC#{elkStack}[The ELK Stack: working with your logs]
-* [languagename]#GENERIC#{local-docker}[Local development using Docker]
+* [languagename]#GENERIC#{local-build}[Local development using Docker, Docker Compose, and Kubernetes]
 
 === Scale
 

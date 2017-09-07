@@ -32,7 +32,9 @@
 // -- WALKTHROUGHS: GENERAL DEVELOPMENT -- 
 ... link:walkthroughs/createMore.adoc#_game_on_developments[Game On Dev]
 .... link:walkthroughs/elkStack.adoc[ELK Logging]
-.... link:walkthroughs/local-docker.adoc[Local Build]
+.... link:walkthroughs/local-build.adoc[Local Build]
+..... link:walkthroughs/local-docker.adoc[Docker Compose]
+..... link:walkthroughs/local-kubernetes.adoc[Kubernetes]
 ..... link:walkthroughs/git.adoc[Git]
 ..... link:walkthroughs/adding_your_own_sso_apps_for_local_testing.adoc[Social Login]
 // -- WALKTHROUGHS: SCALE-- 
