@@ -10,6 +10,7 @@
 :yukmodules: https://codingkilledthecat.wordpress.com/2012/04/28/why-your-company-shouldnt-use-git-submodules/
 :installgit: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 :gameontext: https://githubhttps://github.com/gameontext.com/gameontext
+:contribute: https://github.com/gameontext/gameon/blob/master/CONTRIBUTING.md
 
 image::http://imgs.xkcd.com/comics/git.png[caption="", title="xkcd: Git",float="right",align="center",link="http://xkcd.com/1597/", width=250]
 
@@ -41,6 +42,22 @@ If you end up using submodules in anger, consider the following:
 ** Safe(r) push: +
 `git config alias.spush 'push --recurse-submodules=check'`
 
+== Signing Commits
+
+If you're going to contribute code to Game On!, then you need to certify 
+that you agree to the Developer's Certificate of Origin, as documented in 
+our {contribute}[contribution guidelines]. You must use your real name. 
+
+You can make this easy with the following alias: 
+-------------------------------------------
+git config alias.cs 'commit -s'
+-------------------------------------------
+
+Set your name and email (for the project only), using: 
+-------------------------------------------
+git config user.email "joe.smith@email.com>"
+git config user.name "Joe Smith"
+-------------------------------------------
 
 == Other useful aliases
 
@@ -50,6 +67,3 @@ Note global vs. project-specific, make up your own mind which to use.
 `git config --global alias.unstage 'reset HEAD --'`
 * See last commit: +
 `git config --global alias.last 'log -1 HEAD'`
-* Signed commits: +
-`git config alias.cs 'commit -s'` +
-If you're going to contribute code to Game On!, then you need to certify that you agree to the Developer's Certificate of Origin, as documented in our https://github.com/gameontext/gameon/blob/master/CONTRIBUTING.md#sign-your-work[Contribution guidelines]

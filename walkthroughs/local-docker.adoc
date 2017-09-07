@@ -1,232 +1,202 @@
-= Working with Game On! Locally
+= Running with Docker Compose
 :icons: font
 :toc:
 :toc-title:
-:toc-placement: preamble
+:toc-placement: manual
 :toclevels: 2
 :sociallogin: link:adding_your_own_sso_apps_for_local_testing.adoc
 :wdt-eclipse: link:eclipse_and_wdt.adoc
 :12-factor: link:../about/twelve-factors.adoc
 :docker: https://docs.docker.com/engine/installation/
 :git: link:git.adoc
-:vagrant: https://github.com/gameontext/gameon-vagrant
+:vagrant: https://www.vagrantup.com/downloads.html
+:root: https://github.com/gameontext/gameon
+:adventures: link:createMore.adoc
+:contribute: https://github.com/gameontext/gameon/blob/master/CONTRIBUTING.md
+:compose: https://docs.docker.com/compose/install/
+:releases: https://github.com/docker/compose/releases
 
+== Requirements
 
-Developing and testing your room locally in a production-like environment is an
-important aspect of {12-factor}[Twelve factor applications], as it reduces the
-likelihood that what you create locally will fail in new and unexpected ways
-when activated in production.
+Game On! requires `docker-compose` {releases}[version 1.15.0 or greater].
+{compose}[Installation instructions] vary by platform. 
 
-[TIP]
-====
-Don't fancy following all this, and installing everything over your most 
-favorite dev box? Want something to just go do it all for you?
+[[running]]
+== Starting game services locally 
 
-Have a look at our {vagrant}[Vagrant] project, that can take care of this for 
-you, and leave you with a virtual machine ready for local development. The rest
-of the information on this page will still be useful for understanding what has
-been done inside the VM for you.
-====
-
-== Using Docker
-
-We use Docker (and specifically Docker Compose) to set up a local environment
-that is as similar as possible to what will run in production. We provide some
-pre-built images to help you do that, too.
-
-We require docker-compose version 1.6.0 or greater.
-
-{docker}[Installing Docker] varies by platform. On Windows and macOS, you can
-also choose between Docker native and Docker Toolbox. Both should work.
-
-There is a conceptual difference between what happens on linux or Docker native
-vs. Docker Toobox on Windows or macOS that could use some explaining:
-
-* When you run natively, the "host" for your containers is the OS itself, so
-  127.0.0.1 will work just fine.
-* When you run in Docker Toolbox, there is a VirtualMachine acting as the host
-  for your containers. This means that (for URLs and other things) you need to
-  use the xref:dockerhost[IP of the host].
-
-== The Game On! Root Project (gameon)
-
-Game On! uses Docker Compose to coordinate the containers that run each of the game's
-core services. In the root project there will be a `docker-compose.yml` that declares
-the various core services, and a `docker-compose.override.yml.example` that can be used
-when developing locally to help speed up round trip times.
-
-When Game On! runs in the cloud, it uses etcd to obtain its configuration.
-When running locally it expects all this to be fed to it via the environment,
-which `docker-compose.yml` will setup per service from the `gameon.env` file.
-
-.SSH Keys and KeyStores
-****
-Because Game On! uses a Certificate for HTTPS and for JWT signing, we need to
-generate one for local use. The latter part is managed by Docker, with a special
-mapped volume providing a generated local keystore to containers. Both the
-`go-setup.sh` and `go-build.sh` scripts will generate the local keystore. If it
-ever needs to be replaced, delete the keystore directory, and run the appropriate
-script again.
-****
-
-== Local Room Development
-
-1. Obtain the source for this repository:
+1. Obtain the source for the root project ({root}[gameontext/gameon]) 
   * HTTPS: `git clone https://github.com/gameontext/gameon.git`
   * SSH: `git clone git@github.com:gameontext/gameon.git`
 
-2. One time setup, this will ensure that required keystores are setup, and that you have an
-env file suitable for use with docker-compose (whether you're using docker-machine or not).
+2. Change to the gameon directory
 +
-  ./go-setup.sh
+-------------------------------------------
+cd gameon
+-------------------------------------------
+3. Setup your environment (one time). 
 +
-This setup step also pulls the initial images required for running the system.
-
-3. Start Game ON platform services (amalgam8, couchdb, and an elk stack!).
-These services are configured in `platformservices.yml`.
+-------------------------------------------
+./docker/go-setup.sh
+-------------------------------------------
 +
-  ./go-platform-services.sh start
-
-4. Start the core Game ON services (Player, Mediator, Map)
+This will ensure that you have an env file suitable for use 
+with `docker-compose` and pulls the initial images required 
+for running the system. 
 +
-  ./go-run.sh start
+When using Vagrant, this step is done as part of provisioning the VM.
+
+4. Start the game!
 +
-The `go-run.sh` script contains shorthand operations to help with starting,
-stopping, and cleaning up after Game ON core services (in `docker-compose.yml`).
+-------------------------------------------
+./docker/go-run.sh up
+-------------------------------------------
+5. Wait for the system warm up
++
+-------------------------------------------
+./docker/go-run.sh wait
+-------------------------------------------
+or, to watch the logs stream by, try:
++
+-------------------------------------------
+./docker/go-run.sh logs
+-------------------------------------------
 
-Game On! is now running locally.
+6. (Optional) Set the COMPOSE environment variable so you can work with `docker-compose` 
+directly (see <<go-run,below>>).
 
-* If you're running Docker natively, you can access it at http://127.0.0.1/
-* If you're running Docker Toolbox, access it using the xref:dockerhost[IP of the host]
+7. *Carry on with {adventures}[building your room]!*
 
-Carry on with building your rooms!
+8. Clean up 
++
+-------------------------------------------
+./docker/go-run.sh down
+-------------------------------------------
 
-== Core Game Development
+== Files supporting Docker Compose
 
-If you change your mind, and decide you want to start hacking on a core game
-service, no worries! You can mix and match the two approaches, just clone the
-submodule(s) you wish to edit, and carry on with the steps below.
+The `docker` subdirectory of the root project
+contains the files required to make game services go: 
+
+* `docker-compose.yml` declares core game and required backing services
+* `docker-compose.override.yml.example` can be copied to `docker-compose.override.yml` 
+  and modified to support overlays for local development
+* `go-setup.sh` is a script to help configure your local environment to work 
+  with Docker Compose 
+* `go-run.sh` helps with starting, stopping, and cleaning up Game ON core services.
+* `docker-functions` is used by both `go-setup.sh` and `go-run.sh` to 
+  generate the keystore volume and generate the `COMPOSE` environment variable.
+
+[[go-run]]
+[NOTE]
+.About `go-run.sh` and `COMPOSE`
+====
+- Use `./docker/go-run.sh` to get a list of available actions. Some examples:
++
+-------------------------------------------
+./docker/go-run.sh up
+./docker/go-run.sh down
+./docker/go-run.sh logs
+./docker/go-run.sh rebuild
+./docker/go-run.sh restart
+./docker/go-run.sh wait
+-------------------------------------------
+- Use `eval $(./docker/go-run.sh env)` to add the `COMPOSE` environment variable
+  to your shell to help run `docker-compose` commands directly. For example:
++
+-------------------------------------------
+eval $(./docker/go-run.sh env)
+echo ${COMPOSE}
+${COMPOSE} ps
+${COMPOSE} logs
+-------------------------------------------
+The `COMPOSE` environment variable includes `-f` options for `docker-compose.yml` and 
+`docker-compose.override.yml` (if present), and `sudo` (if required).
+====
+
+Additional notes for running with Docker Compose: 
+
+* `docker-compose` still requires sudo on linux platforms, even
+though `docker` doesn't.
+* The Vagrant VM allows all `sudo` operations with no password.
+
+[[rebuild]]
+== Rebuilding Core Game services with Docker Compose
+
+The following instructions assume you've cloned the root repository, 
+and are interested in editing the `map` service as an example: 
 
 1. Change to the gameon directory
 +
-  cd gameon
-
-2. Obtain the source for the project that you want to change. The easiest way is
-to take advantage of {git}[git submodules]. Using the `map` service as an example:
+-------------------------------------------
+cd gameon
+-------------------------------------------
+2. Obtain the source for the project that you want to change.
 +
-  git submodule init map
-  git submodule update map
-
-3. Build/initialize the projects (includes building wars and creating keystores
-required for local development).
+-------------------------------------------
+git submodule init map
+git submodule update map
+-------------------------------------------
+3. Make your changes from within the child directory
 +
-  ./go-build.sh
-
-4. Start the game's platform services (amalgam8, couchdb, and an ELK stack!).
-These services are configured in `platformservices.yml`.
+-------------------------------------------
+cd map
+git checkout -b newbranch
+-------------------------------------------
+Edit source or docker/image files using your favorite IDE.
 +
-  ./go-platform-services.sh start
+TIP: If you plan to edit projects with Eclipse, run `./bin/eclipse.sh` to generate eclipse project files.
 
-5. Build core game docker containers with docker-compose (see <<notes,below>>)
+4. Compile the source and rebuild docker image
+* To rebuild and restart the map service:  
 +
-  ./go-rebuild.sh all
-
-Game On! is now running locally.
-
-* If you're running a *nix variant, you can access it at http://127.0.0.1/
-* If you're running Mac or Windows, access it using the xref:dockerhost[IP of the host]
-
-TIP: If you plan to edit projects with Eclipse, run `eclipse.sh` to generate the project files.
-
-=== Building the Core service docker containers.
-
-At this stage, we now have the keystores built, code compiled,
-and the platform services running. Before we can launch the game, we have to
-create/download the containers for the core services.
-
-We provide a small script that can be used for this. It takes a list of the
-Game On projects to rebuild, and will:
-
-* Stop any old running container for that project
-* Rebuild the code for the project (if present)
-* Remove any old container for the project
-* Build a new container for that project
-* Launch the container using docker compose
-* Update the service proxy controller to route the correct version of the service.
-
-.Rebuild All Game On Services
+-------------------------------------------
+./docker/go-run.sh rebuild map
+-------------------------------------------
+* To rebuild the image without recreating the container:  
++
+-------------------------------------------
+./docker/go-run.sh rebuild_only map
+-------------------------------------------
+* If the service argument is left off, it will attempt to rebuild all
+of the core services (auth, map, mediator, player, room, webapp). If those 
+submodules haven't been checked out, there is no harm. The image from dockerhub
+will be used instead.
++
+[NOTE]
+.Top-down vs. incremental updates
 ====
-```
-./go-rebuild.sh all
-```
-====
-.Rebuild Selected Game On Services
-====
-```
-./go-rebuild.sh auth proxy
-```
-====
-
-After building all Game On Services, the game will now be running locally.
-* If you're running a *nix variant, you can access it at http://127.0.0.1/
-* If you're running Mac or Windows, access it using the docker host IP address
-(see the <<notes,notes below>>)
-
-TIP: To view console logs from the running containers, use ```docker ps```
-to find the name for the container that you wish to view the logs for, and then
-use ```docker logs _containername_```, eg. ```docker logs gameon_auth_1```. Alternately,
-you can use ```docker-compose logs <service_name>```, e.g. ```docker-compose logs player```.
-
-If you are editing the core game services, then you may wish to take a look at
-how each service is available via local ports mapped by the `docker-compose.yml`
-configuration. Eg map will be available via https on port 9447 locally, as well
-as via it's mapped url via proxy on port 80.
-
-TIP: Many of the Game On services also have a simple "LogView" console
-to assist with debug during local development, look for the the
-LogView class in each project to figure out the endpoint address.
-
-
-== Notes
-
-=== Supporting 3rd party auth
-
-3rd party authentication (twitter, github, etc.) will not work locally, but the
-anonymous/dummy user will. If you want to test with one of the 3rd party
-authentication providers, you'll need to {sociallogin}[set up your own tokens to do so.]
-
-[[dockerhost]]
-=== Determining the host IP address (Docker Toolbox)
-
-After you have Docker Toolbox installed, verify the host machine name:
-`docker-machine ls`. The default name is `default`, but if you're a former
-Boot2Docker user, it may be `dev` instead. Substitute this value appropriately
-in what follows.
-
-If you aren't using the docker quick-start terminal, you'll need to set the
-docker environment variables in your command shell using
-`eval "$(docker-machine env default)"`.
-
-Get the IP address for your host using `docker-machine ip default`.
-
-`go-build.sh` and `go-setup.sh` will create a customized copy of `gameon.env`
-for the active DOCKER_MACHINE_NAME, that will perform the substitution to the
-associated IP address.
-
-=== Top-down vs. incremental updates
-
 If you want to try using incremental publish, where your changes are live inside
 the container without requiring the container to be stopped, started, rebuilt
-or otherwise messed with, you'll need to add some lines to `docker-compose.override.yml`
-to create overlay volumes.
+or otherwise messed with, you'll need to create and/or add some lines 
+to `./docker/docker-compose.override.yml` to create overlay volumes.
 
-`docker-compose.override.yml.example` maps expected github subrepository paths
-as volumes. Copy snippets from that file for the services you're interested in
-into `docker-compose.override.yml`.
+`./docker/docker-compose.override.yml.example` provides examples of how
+to map expected github subrepository paths to volumes. Copy snippets from 
+that file for the services you're interested in into `docker-compose.override.yml`.
 
-==== Iterative development of Java applications with WDT
+`./docker/go-run.sh` will accommodate the creation of the `docker-compose.override.yml`
+file, but you may need to run `eval $(./docker/go-run.sh env)` to update your
+`COMPOSE` environment variable.
+====
 
-We highly recommend using WebSphere Developer Tools (WDT) to work with the Java
-services contained in the sample. Going along with the incremental publish support
-provided by the `docker-compose-override.yml` file, there is some (one time)
-{wdt-eclipse}[configuration required to make WDT happy with the docker-hosted applications].
+5. Push your changes to a new branch. From the map directory: 
++
+-------------------------------------------
+git add -u
+git commit -s  
+-------------------------------------------
++
+[NOTE]
+====
+Git commits must be {contribute}[signed]
+====
+Once you make your commit, if you go back to the root directory, you will see 
+a pending change for map. This indicates that the submodule is different than
+the version from the current branch of the root project. *Do not
+check in this change.* Sadly, these files can not be added to `.gitignore`.
++
+Care must be taken to avoid staging these files if you otherwise end up making
+changes to files in the root project itself.
+
+ 
+
