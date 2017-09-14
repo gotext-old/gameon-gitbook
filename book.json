@@ -12,7 +12,6 @@
         "meta",
         "sitemap",
         "youtube",
-        "ga",
         "-fontsettings",
         "-sharing"
     ],
@@ -21,17 +20,16 @@
     },
     "pluginsConfig": {
         "addcssjs": {
-            "css": [
-                "styles/asciidoctor-custom.css",
-                "styles/gameontext.css"
-            ]
+          "css": [
+            "styles/asciidoctor-custom.css",
+            "styles/gameontext.css"
+          ],
+          "js": [
+            "js/analytics.js"
+          ]
         },
         "github": {
             "url": "https://github.com/gameontext"
-        },
-        "ga": {
-          "token": "UA-90113653-4",
-          "configuration": "auto"
         },
         "meta": {
             "data": [
