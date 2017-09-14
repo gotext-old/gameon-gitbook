@@ -3,6 +3,7 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga2');
 ga2('create', 'UA-90113653-2', 'auto', {allowLinker: true});
+ga2('set', 'dimension1', 'book');
 ga2('require', 'linker');
 ga2('linker:autoLink', ['gameontext.org','blog.gameontext.org','book.gameontext.org']);
 ga2('send', 'pageview');
