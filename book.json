@@ -12,6 +12,7 @@
         "meta",
         "sitemap",
         "youtube",
+        "ga",
         "-fontsettings",
         "-sharing"
     ],
@@ -28,6 +29,10 @@
         "github": {
             "url": "https://github.com/gameontext"
         },
+        "ga": {
+          "token": "UA-90113653-4",
+          "configuration": "auto"
+        },
         "meta": {
             "data": [
                 {
@@ -37,7 +42,7 @@
             ]
         },
         "sitemap": {
-            "hostname": "http://book.game-on.org/"
+            "hostname": "http://book.gameontext.org/"
         }
     }
 }
