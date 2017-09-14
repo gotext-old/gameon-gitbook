@@ -23,9 +23,6 @@
           "css": [
             "styles/asciidoctor-custom.css",
             "styles/gameontext.css"
-          ],
-          "js": [
-            "js/analytics.js"
           ]
         },
         "github": {

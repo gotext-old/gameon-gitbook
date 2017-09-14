@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="{{ config.language }}" {% if page.dir == "rtl" %}dir="rtl"{% endif %}>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>{% block title %}{{ config.title|d("GitBook", true) }}{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="{% block description %}{% endblock %}">
+        <meta name="generator" content="GitBook {{ gitbook.version }}">
+        {% if config.author %}<meta name="author" content="{{ config.author }}">{% endif %}
+        {% if config.isbn %}<meta name="identifier" content="{{ config.isbn }}" scheme="ISBN">{% endif %}
+        {% block style %}
+            {% for resource in plugins.resources.css %}
+                {% if resource.url %}
+                <link rel="stylesheet" href="{{ resource.url }}">
+                {% else %}
+                <link rel="stylesheet" href="{{ resource.path|resolveAsset }}">
+                {% endif %}
+            {% endfor %}
+        {% endblock %}
+        {% block head %}{% endblock %}
+        <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        window.ga(function() {
+          window.ga('create', 'UA-90113653-2', 'auto', 'gameontext', {allowLinker: true});
+          window.ga('gameontext.require', 'linker');
+          window.ga('gameontext.linker:autoLink', ['gameontext.org','blog.gameontext.org','book.gameontext.org']);
+          window.ga('gameontext.set','dimension1', 'book');
+          window.ga('gameontext.set','location', 'https://book.gameontext.org/');
+          window.ga('gameontext.send','pageview');
+        });
+        </script>
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascript %}{% endblock %}
+    </body>
+</html>
