@@ -45,31 +45,34 @@ for running the system.
 +
 When using Vagrant, this step is done as part of provisioning the VM.
 
+4. Create aliases to make it easier to manage core game services 
+with `docker-compose` (see <<go-run,below>>).
++
+-------------------------------------------
+eval $(./docker/go-run.sh env)
+-------------------------------------------
 4. Start the game!
 +
 -------------------------------------------
-./docker/go-run.sh up
+go-run up
 -------------------------------------------
 5. Wait for the system warm up
 +
 -------------------------------------------
-./docker/go-run.sh wait
+go-run wait
 -------------------------------------------
 or, to watch the logs stream by, try:
 +
 -------------------------------------------
-./docker/go-run.sh logs
+go-run logs
 -------------------------------------------
-
-6. (Optional) Set the COMPOSE environment variable so you can work with `docker-compose` 
-directly (see <<go-run,below>>).
 
 7. *Carry on with {adventures}[building your room]!*
 
 8. Clean up 
 +
 -------------------------------------------
-./docker/go-run.sh down
+go-run down
 -------------------------------------------
 
 == Files supporting Docker Compose
@@ -84,36 +87,44 @@ contains the files required to make game services go:
   with Docker Compose 
 * `go-run.sh` helps with starting, stopping, and cleaning up Game ON core services.
 * `docker-functions` is used by both `go-setup.sh` and `go-run.sh` to 
-  generate the keystore volume and generate the `COMPOSE` environment variable.
+  generate the keystore volume and generate environment-appropriate commands.
 
 [[go-run]]
 [NOTE]
-.About `go-run.sh` and `COMPOSE`
+.About `go-run.sh`, `go-run`, and `go-compose`:
 ====
-- Use `./docker/go-run.sh` to get a list of available actions. Some examples:
-+
--------------------------------------------
-./docker/go-run.sh up
-./docker/go-run.sh down
-./docker/go-run.sh logs
-./docker/go-run.sh rebuild
-./docker/go-run.sh restart
-./docker/go-run.sh wait
--------------------------------------------
-- Use `eval $(./docker/go-run.sh env)` to add the `COMPOSE` environment variable
-  to your shell to help run `docker-compose` commands directly. For example:
+- Use `eval $(./docker/go-run.sh env)` to add `go-run` and `go-compose` aliases
+  to your shell:
 +
 -------------------------------------------
 eval $(./docker/go-run.sh env)
-echo ${COMPOSE}
-${COMPOSE} ps
-${COMPOSE} logs
+alias
 -------------------------------------------
-The `COMPOSE` environment variable includes `-f` options for `docker-compose.yml` and 
-`docker-compose.override.yml` (if present), and `sudo` (if required).
+
+- Use `go-run` without arguments to get a list of available actions. Some examples 
+  based on the alias created above:
++
+-------------------------------------------
+go-run up
+go-run down
+go-run logs
+go-run rebuild
+go-run restart
+go-run wait
+-------------------------------------------
+
+- `go-compose` wraps the invocation of `docker-compose` with `-f` options for 
+`docker-compose.yml` and `docker-compose.override.yml` (if present), and 
+`sudo` (if required). 
++
+-------------------------------------------
+go-compose ps
+go-compose logs
+-------------------------------------------
+
 ====
 
-Additional notes for running with Docker Compose: 
+Additional notes when running with Docker Compose: 
 
 * `docker-compose` still requires sudo on linux platforms, even
 though `docker` doesn't.
@@ -176,7 +187,7 @@ that file for the services you're interested in into `docker-compose.override.ym
 
 `./docker/go-run.sh` will accommodate the creation of the `docker-compose.override.yml`
 file, but you may need to run `eval $(./docker/go-run.sh env)` to update your
-`COMPOSE` environment variable.
+aliases.
 ====
 
 5. Push your changes to a new branch. From the map directory: 
