@@ -211,7 +211,7 @@ receiving a `roomHello`.
 ----
 player,<playerId>,{
     "type": "location",
-    "name": "Room name",
+    "name": "shortName",
     "fullName": "Room's descriptive full name",
     "description": "Lots of text about what the room looks like",
     "exits": {
@@ -225,8 +225,15 @@ player,<playerId>,{
 }
 ----
 
-Note: Some attributes, like "exits", "commands", and "roomInventory" can also be
-sent with other room events as a pseudo-push notification.
+Some notes: 
+
+* Only `type`, `name`, `fullName`, and `description` are required.
+* Some attributes, like `exits`, `commands`, and `roomInventory` are optional, 
+and can also be sent with other room events as a pseudo-push notification.
+* You should probably leave out `exits`. A room's neighbors can change, 
+and door descriptions (as seen from the outside) are meant to be a clue as to what
+the neighboring room is. We allow exits to be specified to allow things like 
+locked doors. 
 
 === Room -> Mediator -> Client, chat messages
 
