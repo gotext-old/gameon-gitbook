@@ -23,21 +23,21 @@ likelihood that what you create locally will fail in new and unexpected ways
 when activated in production.
 
 Game On! is a containerized application that uses replaceable backing services
-that can also run locally in containers (sometimes with minor substitutions, 
-as we'll see). We like this for two reasons: 1) we can directly see what happens 
-when we prod things with a stick, and 2) we can be much more destructive with 
+that can also run locally in containers (sometimes with minor substitutions,
+as we'll see). We like this for two reasons: 1) we can directly see what happens
+when we prod things with a stick, and 2) we can be much more destructive with
 local copies without worrying about messing something up.
 
 == Using Vagrant
 
-The Vagrantfile defined in the {root}[gameontext/gameon] (root) project will ensure that you're 
+The Vagrantfile defined in the {root}[gameontext/gameon] (root) project will ensure that you're
 using the right versions of everything, regardless of which orchestration engine
 you use, at the cost of getting one version right.
 
-You need at least version 1.9.8 of Vagrant, which you can install using packages 
+You need at least version 1.9.8 of Vagrant, which you can install using packages
 from the {vagrant}[Vagrant downloads page].
 
-Once you have Vagrant installed: 
+Once you have Vagrant installed:
 
 1. Use `vagrant up` to provision and launch the Vagrant VM.
 2. Use `vagrant ssh` to create a command shell in the VM
@@ -50,7 +50,7 @@ Once you have Vagrant installed:
 
 == Using Docker
 
-{docker}[Installation instructions] for Docker vary by platform. On Windows and 
+{docker}[Installation instructions] for Docker vary by platform. On Windows and
 macOS, you can also choose between Docker native and Docker Toolbox. Both should work.
 
 We provide {dockerhub}[pre-built images on dockerhub] to simplify the steps
@@ -58,82 +58,61 @@ required to run the game locally.
 
 == Container orchestration
 
-For sanity, you need help of some kind to manage starting and stopping images. 
-Even with the orchstrators, we still wrap invocations with shell scripts: 
-the scripts help ensure we all issue the same commands the same way every time. 
+For sanity, you need help of some kind to manage starting and stopping images.
+Even with the orchestrators, we still wrap invocations with shell scripts:
+the scripts help ensure we all issue the same commands the same way every time.
 
 * {using-compose}[Using Docker Compose]
 * {using-kubernetes}[Using Kubernetes]
 
-NOTE: The following sections apply to both Docker Compose and Kubernetes. 
-The `GO_DEPLOYMENT` environment variable should be set to select 
-the target environment. The default value is `docker-compose`.
+NOTE: The following sections apply to both Docker Compose and Kubernetes.
+Use `./go-admin.sh choose` to toggle between them. The default value is `docker`
+(to indicate Docker Compose).
 
 == Starting game services locally (TL;DR)
 
-1. Obtain the source for this repository:
+1. Obtain the source for the root project ({root}[gameontext/gameon])
   * HTTPS: `git clone https://github.com/gameontext/gameon.git`
   * SSH: `git clone git@github.com:gameontext/gameon.git`
 
 2. Change to the gameon directory
 +
 -------------------------------------------
-cd gameon
+$ cd gameon
 -------------------------------------------
-3. Setup your environment (one time). 
+3. Setup your environment (one time).
 +
 -------------------------------------------
-./go-admin.sh setup
+$ ./go-admin.sh choose       # choose Docker Compose or Kubernetes
+$ eval $(./go-admin.sh env)  # set aliases for admin scripts
+$ alias go-run               # confirm `go-run.sh` script location
 -------------------------------------------
-4. Start core game services: 
-+ 
--------------------------------------------
-./go-admin.sh up
--------------------------------------------
-5. *Carry on with {adventures}[building your room]!*
-
-6. Clean up 
+4. Set up core game services:
 +
 -------------------------------------------
-./go-admin down
+$ go-run setup
+-------------------------------------------
+5. Start core game services:
++
+-------------------------------------------
+$ go-run up
+-------------------------------------------
+6. *Carry on with {adventures}[building your room] or other adventures*
+
+7. Clean up
++
+-------------------------------------------
+$ go-run down
 -------------------------------------------
 
-== Configuration 
-
-When Game On! runs in the cloud, it uses etcd to obtain its configuration.
-When running locally it expects all this to be fed to it via the environment.
-The `gameon.env` file defined in the root directory provides this local 
-configuration, and is consumed by both Docker Compose and Kubernetes.
-
-Some addional notes regarding environment-specific config: 
-
-* When you run natively, the "host" for your containers is the OS itself, so
-  127.0.0.1 will work just fine (default url in `gameon.env`).
-  
-* When you run in Docker Toolbox, there is a VirtualMachine acting as the host
-  for your containers. This means that (for URLs and other things) you need to
-  use the xref:dockerhost[IP of the VM]. A `gameon.<DOCKER_MACHINE_NAME>env`
-  file will be created as a modified copy of `gameon.env` to adjust. 
-  
-* Similarly, if you are running with Vagrant, you need to use the Vagrant VM's 
-  IP address. A `gameon.vagrantenv` file will be created in the root directory 
-  as a modified copy of `gameon.env`. 
-
-== SSH Keys and KeyStores
-
-Because Game On! uses a Certificate for HTTPS and for JWT signing, we need to
-generate one for local use. We create a special mapped volume (called `keystore`) 
-that provides a generated local keystore to containers. 
-
-Scripts will ensure that this volume exists.
 
 == Modifying Core Game services
 
 If you change your mind, and decide you want to start hacking on a core game
-service, no worries! You can mix and match the two approaches. 
+service, no worries! You can mix and match the two approaches.
 
-We use {git}[git submodules] to allow editing of core game services while 
-working with the {root}[gameontext/gameon] (root) project to coordinate 
+We use {git}[git submodules] to allow editing of core game services while
+working with the {root}[gameontext/gameon] (root) project to coordinate
 deployment.
 
 [IMPORTANT]
@@ -142,8 +121,8 @@ When using {git}[git submodules], please do not commit any changes to submodule
 versions. Submodule versions are maintained by automated builds.
 ====
 
-The following instructions assume you've cloned the root repository, 
-and are interested in editing the `map` service as an example: 
+The following instructions assume you've cloned the root repository,
+and are interested in editing the `map` service as an example:
 
 1. Change to the gameon directory
 +
@@ -170,18 +149,18 @@ TIP: If you plan to edit projects with Eclipse, run `./bin/eclipse.sh` to genera
 * <<local-docker.adoc#rebuild,Rebuild with Docker Compose>>
 * <<local-kubernetes.adoc#rebuild,Rebuild with Kubernetes>>
 
-5. Push your changes to a new branch. From the map directory: 
+5. Push your changes to a new branch. From the map directory:
 +
 -------------------------------------------
 git add -u
-git commit -s  
+git commit -s
 -------------------------------------------
 +
 [NOTE]
 ====
 Git commits must be {contribute}[signed]
 ====
-Once you make your commit, if you go back to the root directory, you will see 
+Once you make your commit, if you go back to the root directory, you will see
 a pending change for map. This indicates that the submodule is different than
 the version from the current branch of the root project. *Do not
 check in this change.* Sadly, these files can not be added to `.gitignore`.
@@ -191,39 +170,9 @@ changes to files in the root project itself.
 
 == Notes
 
-==== Iterative development of Java applications with WDT
-
-If you're using Eclipse for development, and have opted for the iterative 
-approach (using `docker-compose.override.yml` for volumes, e.g.), 
-we recommend using WebSphere Developer Tools (WDT) to work with the Java
-services contained in the sample. There is some (one time) {wdt-eclipse}[configuration 
-required to make WDT happy with the docker-hosted applications], 
-but you are then free to use eclipse to make changes to the project that will
-be immediately picked up by the running server without having to rebuild
-or restart anything.
-
 === Supporting 3rd party auth
 
 3rd party authentication (twitter, github, etc.) will not work locally, but the
 anonymous/dummy user will. If you want to test with one of the 3rd party
-authentication providers, you'll need to 
+authentication providers, you'll need to
 {sociallogin}[set up your own tokens to do so.]
-
-[[dockerhost]]
-=== Determining the host IP address (Docker Toolbox)
-
-After you have Docker Toolbox installed, verify the host machine name:
-`docker-machine ls`. The default name is `default`, but if you're a former
-Boot2Docker user, it may be `dev` instead. Substitute this value appropriately
-in what follows.
-
-If you aren't using the docker quick-start terminal, you'll need to set the
-docker environment variables in your command shell using
-`eval "$(docker-machine env default)"`.
-
-Get the IP address for your host using `docker-machine ip default`.
-
-`./docker/go-setup.sh` and `./docker/go-run.sh` will create a 
-`gameon.<DOCKER_MACHINE_NAME>env` file to account for the IP address
-difference.
-
