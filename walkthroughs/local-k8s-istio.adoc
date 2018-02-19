@@ -11,10 +11,11 @@
 :cluster: https://github.com/gameontext/gameon/tree/master/kubernetes#set-up-a-kubernetes-cluster
 :istio-install: https://istio.io/docs/setup/kubernetes/quick-start.html
 :istio-sidecar: https://istio.io/docs/setup/kubernetes/sidecar-injection.html#automatic-sidecar-injection
+:istio-fault:  link:local-k8s-istio-fault.adoc
 
-In this adventure, we'll look at adding Istio to a Kubernetes cluster running our
-core game services, to see what it does and how it works. So we don't make a mess
-of our configration with, and without, Istio, we'll be using {istio-sidecar}[automatic sidecar
+In this adventure, we'll add Istio to the Kubernetes cluster running our core
+game services, to see what it does and how it works. So we don't make a mess of
+our configration with, and without, Istio, we'll be using {istio-sidecar}[automatic sidecar
 injection].
 
 == Requirements
@@ -253,4 +254,5 @@ $ kubectl -n gameon-system delete pod <pod without sidecar>
 $ kubectl -n gameon-system get pod
 -------------------------------------------
 +
-Once all pods are back to 2/2 READY state, it's off to the next adventure.
+Once all pods are back to 2/2 READY state, it's time to move on to the [next
+adventure with Istio].
