@@ -37,7 +37,7 @@ $ cd gameon
 +
 -------------------------------------------
 $ ./go-admin.sh choose       # choose Docker Compose
-$ eval $(./go-admin.sh env)  # set aliases for admin scripts
+$ eval $(./go-admin.sh env)  # set script aliases
 $ alias go-run               # confirm `docker/go-run.sh`
 -------------------------------------------
 4. Set up core game services (repeatable):

@@ -21,9 +21,10 @@
 == Requirements
 
 * {docker}[Docker]
-* {kubectl}[kubectl]
+* Kubernetes version 1.9 or greater:
+  - [kubectl]
+  - A {cluster}[configured Kubernetes cluster]
 * {helm}[helm] (optional)
-* A {cluster}[configured Kubernetes cluster]
 
 [[running]]
 == Starting game services locally
@@ -41,7 +42,7 @@ $ cd gameon
 +
 -------------------------------------------
 $ ./go-admin.sh choose       # choose Docker Compose
-$ eval $(./go-admin.sh env)  # set aliases for admin scripts
+$ eval $(./go-admin.sh env)  # set script aliases
 $ alias go-run               # confirm `docker/go-run.sh`
 -------------------------------------------
 4. Set up core game services (repeatable):
