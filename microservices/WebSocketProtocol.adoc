@@ -255,7 +255,7 @@ player,<playerId>,{
     "content": {
         "*": "general text for everyone",
         "<playerId>": "specific to player"
-        },
+    },
     "bookmark": "String representing last message seen"
 }
 player,*,{
