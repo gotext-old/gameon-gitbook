@@ -123,18 +123,13 @@ These are short messages that the Mediator sends while managing room connections
 roomHello,<roomId>,{
     "username": "username",
     "userId": "<userId>",
-    "version": 1|2,
-    "recovery": true|false
+    "version": 1|2
 }
 ----
 
 Sent when a player changes location to arrive in the room. The version field
 is the version of this WebSocket protocol selected by the mediator based on
 the ack sent by the room.
-
-The "recovery" attribute may not be present. If it is present, and `true`, then
-the roomHello is happening after recovering from a dropped or failed connection.
-Users may or may not be already known to the room.
 
 Supported versions: 1, 2
 
@@ -225,15 +220,15 @@ player,<playerId>,{
 }
 ----
 
-Some notes: 
+Some notes:
 
 * Only `type`, `name`, `fullName`, and `description` are required.
-* Some attributes, like `exits`, `commands`, and `roomInventory` are optional, 
+* Some attributes, like `exits`, `commands`, and `roomInventory` are optional,
 and can also be sent with other room events as a pseudo-push notification.
-* You should probably leave out `exits`. A room's neighbors can change, 
+* You should probably leave out `exits`. A room's neighbors can change,
 and door descriptions (as seen from the outside) are meant to be a clue as to what
-the neighboring room is. We allow exits to be specified to allow things like 
-locked doors. 
+the neighboring room is. We allow exits to be specified to allow things like
+locked doors.
 
 === Room -> Mediator -> Client, chat messages
 
